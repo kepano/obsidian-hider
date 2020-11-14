@@ -97,7 +97,7 @@ class HiderSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
     new Setting(containerEl)
-    	.setName('Frameless mode')
+    	.setName('Hide title bar (frameless mode)')
     	.setDesc('Hides the title bar (best on macOS)')
     	.addToggle(toggle => toggle.setValue(this.plugin.settings.frameless)
 	        .onChange((value) => {
@@ -120,7 +120,7 @@ class HiderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
     	.setName('Hide status bar')
-    	.setDesc('Hides word count, backlink count, etc')
+    	.setDesc('Hides word count, character count and backlink count')
     	.addToggle(toggle => toggle.setValue(this.plugin.settings.hideStatus)
 	        .onChange((value) => {
 	          this.plugin.settings.hideStatus = value;
@@ -142,7 +142,7 @@ class HiderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Hide tooltips')
-      .setDesc('Hides the tooltips')
+      .setDesc('Hides all tooltips')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideTooltips)
           .onChange((value) => {
             this.plugin.settings.hideTooltips = value;

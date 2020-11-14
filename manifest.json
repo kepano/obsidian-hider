@@ -3,7 +3,7 @@
 	"name": "Hider",
 	"version": "1.0.0",
 	"minAppVersion": "0.9.12",
-	"description": "Hides features",
+	"description": "Hide UI elements such as tooltips, status, titlebar and more",
 	"author": "@kepano",
 	"authorUrl": "https://www.twitter.com/kepano",
 	"isDesktopOnly": false

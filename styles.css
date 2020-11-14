@@ -7,8 +7,16 @@
 }
 
 /* Frameless */
+.hider-frameless .titlebar,
+.hider-frameless .titlebar-inner,
 .hider-frameless .titlebar-button-container {
-  display:none !important;
+  display:none;
+}
+.hider-frameless {
+  padding-top:0 !important;
+}
+.hider-frameless .workspace-split.mod-left-split > .workspace-tabs {
+  padding-top:18px;
 }
 
 /* Hide scrollbars */

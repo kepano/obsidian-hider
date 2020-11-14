@@ -2,9 +2,9 @@
 
 This plugin enable you to hide certain parts of the Obsidian UI. Note that your CSS theme may override Hider.
 
+- Hide app ribbon (can be bound to a hotkey)
+- Hide status bar (can be bound to a hotkey)
 - Hide title bar
-- Hide app ribbon
-- Hide status bar
 - Hide scrollbars
 - Hide tooltips
 
