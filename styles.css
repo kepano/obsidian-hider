@@ -7,10 +7,15 @@
 }
 
 /* Frameless */
-.hider-frameless .titlebar,
-.hider-frameless .titlebar-inner,
 .hider-frameless .titlebar-button-container {
   display:none;
+}
+.hider-frameless .titlebar,
+.hider-frameless .titlebar-inner {
+  position:fixed;
+  top:0;
+  height:12px;
+  background:transparent;
 }
 .hider-frameless {
   padding-top:0 !important;
