@@ -1,6 +1,9 @@
 /* Hide ribbon */
-.hider-ribbon .workspace-ribbon {
+.hider-ribbon .workspace-ribbon.mod-left {
   display:none;
+}
+.hider-ribbon .workspace-ribbon.mod-right {
+  visibility:hidden;
 }
 .hider-ribbon .workspace-split.mod-right-split {
   margin-right:0;
