@@ -30,6 +30,11 @@
   padding-top:18px;
 }
 
+/* Hide meta */
+.hider-meta .frontmatter-container {
+  display:none;
+}
+
 /* Hide scrollbars */
 .hider-scroll ::-webkit-scrollbar {
   display:none;
@@ -42,5 +47,10 @@
 
 /* Hide tooltips */
 .hider-tooltips .tooltip {
+  display:none;
+}
+
+/* Hide instructions */
+.hider-instructions .prompt-instructions {
   display:none;
 }

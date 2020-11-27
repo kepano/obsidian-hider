@@ -59,6 +59,8 @@ export default class Hider extends Plugin {
     document.body.classList.toggle('hider-frameless', this.settings.frameless);
     document.body.classList.toggle('hider-scroll', this.settings.hideScroll);
     document.body.classList.toggle('hider-tooltips', this.settings.hideTooltips);
+    document.body.classList.toggle('hider-instructions', this.settings.hideInstructions);
+    document.body.classList.toggle('hider-meta', this.settings.hideMeta);
 
     // get the custom css element
     const el = document.getElementById('hider');
@@ -80,6 +82,8 @@ class HiderSettings {
 	hideStatus: boolean = false;
 	hideScroll: boolean = false;
   hideTooltips: boolean = false;
+  hideInstructions: boolean = false;
+  hideMeta: boolean = false;
 }
 
 class HiderSettingTab extends PluginSettingTab {
@@ -150,6 +154,29 @@ class HiderSettingTab extends PluginSettingTab {
             this.plugin.refresh();
             })
           );
+
+    new Setting(containerEl)
+      .setName('Hide instructions')
+      .setDesc('Hides instructional tips in modals')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.hideInstructions)
+          .onChange((value) => {
+            this.plugin.settings.hideInstructions = value;
+            this.plugin.saveData(this.plugin.settings);
+            this.plugin.refresh();
+            })
+          );
+
+    new Setting(containerEl)
+      .setName('Hide metadata block in Preview mode')
+      .setDesc('When front matter is turned off in your Editor settings this hides the metadata block')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.hideMeta)
+          .onChange((value) => {
+            this.plugin.settings.hideMeta = value;
+            this.plugin.saveData(this.plugin.settings);
+            this.plugin.refresh();
+            })
+          );
+
 
 
 	}
