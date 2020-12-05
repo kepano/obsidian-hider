@@ -1,14 +1,14 @@
 import { App, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
 
 export default class Hider extends Plugin {
-	settings: HiderSettings;
+  settings: HiderSettings;
 
-	async onload() {
-		// load settings
+  async onload() {
+    // load settings
     this.settings = await this.loadData() || new HiderSettings();
 
     // add the settings tab
-		this.addSettingTab(new HiderSettingTab(this.app, this));
+    this.addSettingTab(new HiderSettingTab(this.app, this));
     // add the toggle on/off command
 
     this.addCommand({
@@ -31,25 +31,13 @@ export default class Hider extends Plugin {
         this.refresh();
       }
     });
-		this.refresh()
-	}
+    this.refresh()
+  }
 
-	// refresh function for when we change settings
+  // refresh function for when we change settings
   refresh = () => {
     // re-load the style
     this.updateStyle()
-  }
-
-  // add the styling elements we need
-  addStyle = () => {
-    // add a css block for our settings-dependent styles
-    const css = document.createElement('style');
-    css.id = 'hider-theme';
-    document.getElementsByTagName("head")[0].appendChild(css);
-    // add the main class
-    document.body.classList.add('hider-theme');
-    // update the style with the settings-dependent styles
-    this.updateStyle();
   }
 
   // update the styles (at the start, or as the result of a settings change)
@@ -62,25 +50,16 @@ export default class Hider extends Plugin {
     document.body.classList.toggle('hider-instructions', this.settings.hideInstructions);
     document.body.classList.toggle('hider-meta', this.settings.hideMeta);
 
-    // get the custom css element
-    const el = document.getElementById('hider');
-    if (!el) throw "hider element not found!";
-    else {
-      // set the settings-dependent css
-      el.innerText = `
-        body.hider
-      `;
-    }
   }
 
 
 }
 
 class HiderSettings {
-	frameless: boolean = false;
-	hideRibbon: boolean = false;
-	hideStatus: boolean = false;
-	hideScroll: boolean = false;
+  frameless: boolean = false;
+  hideRibbon: boolean = false;
+  hideStatus: boolean = false;
+  hideScroll: boolean = false;
   hideTooltips: boolean = false;
   hideInstructions: boolean = false;
   hideMeta: boolean = false;
@@ -89,60 +68,60 @@ class HiderSettings {
 class HiderSettingTab extends PluginSettingTab {
 
 
-	plugin: Hider;
+  plugin: Hider;
   constructor(app: App, plugin: Hider) {
     super(app, plugin);
     this.plugin = plugin;
-	}
+  }
 
-	display(): void {
-		let {containerEl} = this;
+  display(): void {
+    let {containerEl} = this;
 
-		containerEl.empty();
-
-    new Setting(containerEl)
-    	.setName('Hide title bar (frameless mode)')
-    	.setDesc('Hides the title bar (best on macOS)')
-    	.addToggle(toggle => toggle.setValue(this.plugin.settings.frameless)
-	        .onChange((value) => {
-	          this.plugin.settings.frameless = value;
-	          this.plugin.saveData(this.plugin.settings);
-	          this.plugin.refresh();
-	        	})
-	      	);
-    	
-    new Setting(containerEl)
-    	.setName('Hide app ribbon')
-    	.setDesc('Hides the Obsidian menu. Warning: to open Settings you will need use the hotkey (default is CMD + ,)')
-    	.addToggle(toggle => toggle.setValue(this.plugin.settings.hideRibbon)
-	        .onChange((value) => {
-	          this.plugin.settings.hideRibbon = value;
-	          this.plugin.saveData(this.plugin.settings);
-	          this.plugin.refresh();
-	        	})
-	      	);
+    containerEl.empty();
 
     new Setting(containerEl)
-    	.setName('Hide status bar')
-    	.setDesc('Hides word count, character count and backlink count')
-    	.addToggle(toggle => toggle.setValue(this.plugin.settings.hideStatus)
-	        .onChange((value) => {
-	          this.plugin.settings.hideStatus = value;
-	          this.plugin.saveData(this.plugin.settings);
-	          this.plugin.refresh();
-	        	})
-	      	);
+      .setName('Hide title bar (frameless mode)')
+      .setDesc('Hides the title bar (best on macOS)')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.frameless)
+          .onChange((value) => {
+            this.plugin.settings.frameless = value;
+            this.plugin.saveData(this.plugin.settings);
+            this.plugin.refresh();
+            })
+          );
+      
+    new Setting(containerEl)
+      .setName('Hide app ribbon')
+      .setDesc('Hides the Obsidian menu. Warning: to open Settings you will need use the hotkey (default is CMD + ,)')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.hideRibbon)
+          .onChange((value) => {
+            this.plugin.settings.hideRibbon = value;
+            this.plugin.saveData(this.plugin.settings);
+            this.plugin.refresh();
+            })
+          );
 
     new Setting(containerEl)
-    	.setName('Hide scroll bars')
-    	.setDesc('Hides all scroll bars')
-    	.addToggle(toggle => toggle.setValue(this.plugin.settings.hideScroll)
-	        .onChange((value) => {
-	          this.plugin.settings.hideScroll = value;
-	          this.plugin.saveData(this.plugin.settings);
-	          this.plugin.refresh();
-	        	})
-	      	);
+      .setName('Hide status bar')
+      .setDesc('Hides word count, character count and backlink count')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.hideStatus)
+          .onChange((value) => {
+            this.plugin.settings.hideStatus = value;
+            this.plugin.saveData(this.plugin.settings);
+            this.plugin.refresh();
+            })
+          );
+
+    new Setting(containerEl)
+      .setName('Hide scroll bars')
+      .setDesc('Hides all scroll bars')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.hideScroll)
+          .onChange((value) => {
+            this.plugin.settings.hideScroll = value;
+            this.plugin.saveData(this.plugin.settings);
+            this.plugin.refresh();
+            })
+          );
 
     new Setting(containerEl)
       .setName('Hide tooltips')
@@ -179,5 +158,5 @@ class HiderSettingTab extends PluginSettingTab {
 
 
 
-	}
+  }
 }
