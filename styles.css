@@ -3,7 +3,8 @@
   display:none;
 }
 .hider-ribbon .workspace-ribbon.mod-right {
-  display:none;
+  visibility:hidden;
+  position:absolute;
 }
 .hider-ribbon .workspace-split.mod-right-split {
   margin-right:0;
