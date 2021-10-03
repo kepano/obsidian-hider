@@ -47,6 +47,7 @@ export default class Hider extends Plugin {
     document.body.classList.toggle('hider-frameless', this.settings.frameless);
     document.body.classList.toggle('hider-scroll', this.settings.hideScroll);
     document.body.classList.toggle('hider-tooltips', this.settings.hideTooltips);
+    document.body.classList.toggle('hider-search-suggestions', this.settings.hideSearchSuggestions);
     document.body.classList.toggle('hider-instructions', this.settings.hideInstructions);
     document.body.classList.toggle('hider-meta', this.settings.hideMeta);
 
@@ -61,6 +62,7 @@ class HiderSettings {
   hideStatus: boolean = false;
   hideScroll: boolean = false;
   hideTooltips: boolean = false;
+  hideSearchSuggestions: boolean = false;
   hideInstructions: boolean = false;
   hideMeta: boolean = false;
 }
@@ -140,6 +142,17 @@ class HiderSettingTab extends PluginSettingTab {
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideInstructions)
           .onChange((value) => {
             this.plugin.settings.hideInstructions = value;
+            this.plugin.saveData(this.plugin.settings);
+            this.plugin.refresh();
+            })
+          );
+
+    new Setting(containerEl)
+      .setName('Hide search suggestions')
+      .setDesc('Hides suggestions in search pane')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.hideSearchSuggestions)
+          .onChange((value) => {
+            this.plugin.settings.hideSearchSuggestions = value;
             this.plugin.saveData(this.plugin.settings);
             this.plugin.refresh();
             })

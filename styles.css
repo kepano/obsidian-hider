@@ -51,6 +51,11 @@
   display:none;
 }
 
+/* Hide search suggestions */
+.hider-search-suggestions .suggestion-container.mod-search-suggestion {
+  display: none;
+}
+
 /* Hide instructions */
 .hider-instructions .prompt-instructions {
   display:none;
