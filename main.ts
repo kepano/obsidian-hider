@@ -5,7 +5,7 @@ export default class Hider extends Plugin {
 
   async onload() {
     // load settings
-    this.settings = await this.loadData() || new HiderSettings();
+    await this.loadSettings();
 
     // add the settings tab
     this.addSettingTab(new HiderSettingTab(this.app, this));
@@ -34,6 +34,18 @@ export default class Hider extends Plugin {
     this.refresh()
   }
 
+  onunload() {
+    console.log('Unloading Hider plugin');
+  }
+
+  async loadSettings() {
+    this.settings = Object.assign(DEFAULT_SETTINGS, await this.loadData());
+  }
+
+  async saveSettings() {
+    await this.saveData(this.settings);
+  }
+
   // refresh function for when we change settings
   refresh = () => {
     // re-load the style
@@ -56,15 +68,26 @@ export default class Hider extends Plugin {
 
 }
 
-class HiderSettings {
-  frameless: boolean = false;
-  hideRibbon: boolean = false;
-  hideStatus: boolean = false;
-  hideScroll: boolean = false;
-  hideTooltips: boolean = false;
-  hideSearchSuggestions: boolean = false;
-  hideInstructions: boolean = false;
-  hideMeta: boolean = false;
+
+interface HiderSettings {
+  frameless: boolean;
+  hideRibbon: boolean;
+  hideStatus: boolean;
+  hideScroll: boolean;
+  hideTooltips: boolean;
+  hideSearchSuggestions: boolean;
+  hideInstructions: boolean;
+  hideMeta: boolean;
+}
+const DEFAULT_SETTINGS: HiderSettings = {
+  frameless: false,
+  hideRibbon: false,
+  hideStatus: false,
+  hideScroll: false,
+  hideTooltips: false,
+  hideSearchSuggestions: false,
+  hideInstructions: false,
+  hideMeta: false
 }
 
 class HiderSettingTab extends PluginSettingTab {
