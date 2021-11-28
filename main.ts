@@ -55,6 +55,7 @@ export default class Hider extends Plugin {
   // update the styles (at the start, or as the result of a settings change)
   updateStyle = () => {
     document.body.classList.toggle('hider-ribbon', this.settings.hideRibbon);
+    document.body.classList.toggle('hider-ribbon-left', this.settings.hideLeftRibbon);
     document.body.classList.toggle('hider-status', this.settings.hideStatus);
     document.body.classList.toggle('hider-frameless', this.settings.frameless);
     document.body.classList.toggle('hider-scroll', this.settings.hideScroll);
@@ -78,6 +79,7 @@ interface HiderSettings {
   hideSearchSuggestions: boolean;
   hideInstructions: boolean;
   hideMeta: boolean;
+  hideLeftRibbon: boolean;
 }
 const DEFAULT_SETTINGS: HiderSettings = {
   frameless: false,
@@ -87,7 +89,8 @@ const DEFAULT_SETTINGS: HiderSettings = {
   hideTooltips: false,
   hideSearchSuggestions: false,
   hideInstructions: false,
-  hideMeta: false
+  hideMeta: false,
+  hideLeftRibbon: false,
 }
 
 class HiderSettingTab extends PluginSettingTab {
@@ -192,7 +195,16 @@ class HiderSettingTab extends PluginSettingTab {
             })
           );
 
-
+    new Setting(containerEl)
+    .setName('Only hide left ribbon')
+    .setDesc('Hides the Obsidian menu. Warning: to open Settings you will need use the hotkey (default is CMD + ,)')
+    .addToggle(toggle => toggle.setValue(this.plugin.settings.hideLeftRibbon)
+        .onChange((value) => {
+          this.plugin.settings.hideLeftRibbon = value;
+          this.plugin.saveData(this.plugin.settings);
+          this.plugin.refresh();
+          })
+        );
 
   }
 }
