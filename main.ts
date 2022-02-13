@@ -62,12 +62,10 @@ export default class Hider extends Plugin {
     document.body.classList.toggle('hider-search-suggestions', this.settings.hideSearchSuggestions);
     document.body.classList.toggle('hider-instructions', this.settings.hideInstructions);
     document.body.classList.toggle('hider-meta', this.settings.hideMeta);
-
+    document.body.classList.toggle('hider-vault', this.settings.hideVault);
   }
 
-
 }
-
 
 interface HiderSettings {
   frameless: boolean;
@@ -78,6 +76,7 @@ interface HiderSettings {
   hideSearchSuggestions: boolean;
   hideInstructions: boolean;
   hideMeta: boolean;
+  hideVault: boolean;
 }
 const DEFAULT_SETTINGS: HiderSettings = {
   frameless: false,
@@ -87,7 +86,8 @@ const DEFAULT_SETTINGS: HiderSettings = {
   hideTooltips: false,
   hideSearchSuggestions: false,
   hideInstructions: false,
-  hideMeta: false
+  hideMeta: false,
+  hideVault: false
 }
 
 class HiderSettingTab extends PluginSettingTab {
@@ -114,7 +114,7 @@ class HiderSettingTab extends PluginSettingTab {
             this.plugin.refresh();
             })
           );
-      
+
     new Setting(containerEl)
       .setName('Hide app ribbon')
       .setDesc('Hides the Obsidian menu. Warning: to open Settings you will need use the hotkey (default is CMD + ,)')
@@ -132,6 +132,17 @@ class HiderSettingTab extends PluginSettingTab {
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideStatus)
           .onChange((value) => {
             this.plugin.settings.hideStatus = value;
+            this.plugin.saveData(this.plugin.settings);
+            this.plugin.refresh();
+            })
+          );
+
+    new Setting(containerEl)
+      .setName('Hide vault name')
+      .setDesc('Hides the root folder name')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.hideVault)
+          .onChange((value) => {
+            this.plugin.settings.hideVault = value;
             this.plugin.saveData(this.plugin.settings);
             this.plugin.refresh();
             })
@@ -182,7 +193,7 @@ class HiderSettingTab extends PluginSettingTab {
           );
 
     new Setting(containerEl)
-      .setName('Hide metadata block in Preview mode')
+      .setName('Hide metadata block in Reading view')
       .setDesc('When front matter is turned off in your Editor settings this hides the metadata block')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideMeta)
           .onChange((value) => {

@@ -8,11 +8,13 @@ This plugin enables you to hide certain parts of the Obsidian UI. Note that your
 
 - Hide app ribbon (can be bound to a hotkey)
 - Hide status bar (can be bound to a hotkey)
+- Hide vault name
 - Hide title bar
 - Hide scrollbars
 - Hide search suggestions
 - Hide tooltips
 - Hide instructions in prompts
+- Hide metadata in Reading view
 
 ## Making your theme compatible with Hider
 
@@ -22,8 +24,10 @@ Hider injects the following classes on the `body` element when features are togg
 | ------ | ----- |
 | Title bar | `.hider-frameless` |
 | App ribbon | `.hider-ribbon` |
+| Vault name | `.hider-vault` |
 | Status bar | `.hider-status` |
 | Scrollbars | `.hider-scroll` |
 | Search suggestions | `.hider-search-suggestions` |
 | Tooltips | `.hider-tooltips` |
 | Instructions | `.hider-instructions` |
+| Metadata | `.hider-meta` |
