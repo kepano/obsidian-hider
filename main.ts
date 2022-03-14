@@ -63,6 +63,13 @@ export default class Hider extends Plugin {
     document.body.classList.toggle('hider-instructions', this.settings.hideInstructions);
     document.body.classList.toggle('hider-meta', this.settings.hideMeta);
     document.body.classList.toggle('hider-vault', this.settings.hideVault);
+
+    // if "hide titlebar" is on, show titlebar on hover.
+    if (this.settings.frameless) {
+      document.addEventListener("mousemove", ShowTitleBarOnHover, true);
+    } else {
+      document.removeEventListener("mousemove", ShowTitleBarOnHover, true);
+    }
   }
 
 }
@@ -88,6 +95,15 @@ const DEFAULT_SETTINGS: HiderSettings = {
   hideInstructions: false,
   hideMeta: false,
   hideVault: false
+}
+
+const ShowTitleBarOnHover = function(event: MouseEvent) {
+  if (event.clientY <= 40 && event.clientY - event.movementY > 40 && document.body.classList.contains('hider-frameless')) {
+    document.body.classList.toggle('hider-frameless');
+  }
+  if (event.clientY > 40 && event.clientY - event.movementY <= 40 && !document.body.classList.contains('hider-frameless')) {
+    document.body.classList.toggle('hider-frameless');
+  }
 }
 
 class HiderSettingTab extends PluginSettingTab {

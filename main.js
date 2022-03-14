@@ -89,6 +89,13 @@ var Hider = /** @class */ (function (_super) {
             document.body.classList.toggle('hider-instructions', _this.settings.hideInstructions);
             document.body.classList.toggle('hider-meta', _this.settings.hideMeta);
             document.body.classList.toggle('hider-vault', _this.settings.hideVault);
+
+            // if "hide titlebar" is on, show titlebar on hover.
+            if(_this.settings.frameless){
+                document.addEventListener("mousemove", ShowTitleBarOnHover, true);
+            }else{
+                document.removeEventListener("mousemove", ShowTitleBarOnHover, true);
+            }
         };
         return _this;
     }
@@ -177,6 +184,16 @@ var DEFAULT_SETTINGS = {
     hideMeta: false,
     hideVault: false
 };
+
+const ShowTitleBarOnHover = function(event){
+    if(event.clientY <= 40 && event.clientY - event.movementY > 40 && document.body.classList.contains('hider-frameless')){
+        document.body.classList.toggle('hider-frameless');
+    }
+    if(event.clientY > 40 && event.clientY - event.movementY <= 40 && !document.body.classList.contains('hider-frameless')){
+        document.body.classList.toggle('hider-frameless');
+    }
+}
+
 var HiderSettingTab = /** @class */ (function (_super) {
     __extends(HiderSettingTab, _super);
     function HiderSettingTab(app, plugin) {
