@@ -17,6 +17,9 @@
 .hider-ribbon .workspace-split.mod-left-split {
   margin-left:0;
 }
+.hider-ribbon.is-hidden-frameless:not(.is-fullscreen) .workspace-tabs.mod-top-left-space .workspace-tab-header-container {
+  padding-left: calc(var(--frame-left-space) + var(--ribbon-width));
+}
 
 /* Frameless */
 .hider-frameless .titlebar-button-container {
