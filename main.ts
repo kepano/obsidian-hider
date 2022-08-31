@@ -182,8 +182,8 @@ class HiderSettingTab extends PluginSettingTab {
           );
 
     new Setting(containerEl)
-      .setName('Hide search term counts')
-      .setDesc('Hides the number next to each search result indicating the number of appearances')
+      .setName('Hide count of search term matches')
+      .setDesc('Hides the number of matches within each search result')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideSearchCounts)
           .onChange((value) => {
             this.plugin.settings.hideSearchCounts = value;
