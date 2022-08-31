@@ -56,10 +56,10 @@ export default class Hider extends Plugin {
   updateStyle = () => {
     document.body.classList.toggle('hider-ribbon', this.settings.hideRibbon);
     document.body.classList.toggle('hider-status', this.settings.hideStatus);
-    document.body.classList.toggle('hider-frameless', this.settings.frameless);
     document.body.classList.toggle('hider-scroll', this.settings.hideScroll);
     document.body.classList.toggle('hider-tooltips', this.settings.hideTooltips);
     document.body.classList.toggle('hider-search-suggestions', this.settings.hideSearchSuggestions);
+    document.body.classList.toggle('hider-search-counts', this.settings.hideSearchCounts);
     document.body.classList.toggle('hider-instructions', this.settings.hideInstructions);
     document.body.classList.toggle('hider-meta', this.settings.hideMeta);
     document.body.classList.toggle('hider-vault', this.settings.hideVault);
@@ -68,23 +68,23 @@ export default class Hider extends Plugin {
 }
 
 interface HiderSettings {
-  frameless: boolean;
   hideRibbon: boolean;
   hideStatus: boolean;
   hideScroll: boolean;
   hideTooltips: boolean;
   hideSearchSuggestions: boolean;
+  hideSearchCounts: boolean;
   hideInstructions: boolean;
   hideMeta: boolean;
   hideVault: boolean;
 }
 const DEFAULT_SETTINGS: HiderSettings = {
-  frameless: false,
   hideRibbon: false,
   hideStatus: false,
   hideScroll: false,
   hideTooltips: false,
   hideSearchSuggestions: false,
+  hideSearchCounts: false,
   hideInstructions: false,
   hideMeta: false,
   hideVault: false
@@ -103,17 +103,6 @@ class HiderSettingTab extends PluginSettingTab {
     let {containerEl} = this;
 
     containerEl.empty();
-
-    new Setting(containerEl)
-      .setName('Hide title bar (frameless mode)')
-      .setDesc('Hides the title bar (best on macOS)')
-      .addToggle(toggle => toggle.setValue(this.plugin.settings.frameless)
-          .onChange((value) => {
-            this.plugin.settings.frameless = value;
-            this.plugin.saveData(this.plugin.settings);
-            this.plugin.refresh();
-            })
-          );
 
     new Setting(containerEl)
       .setName('Hide app ribbon')
@@ -187,6 +176,17 @@ class HiderSettingTab extends PluginSettingTab {
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideSearchSuggestions)
           .onChange((value) => {
             this.plugin.settings.hideSearchSuggestions = value;
+            this.plugin.saveData(this.plugin.settings);
+            this.plugin.refresh();
+            })
+          );
+
+    new Setting(containerEl)
+      .setName('Hide search term counts')
+      .setDesc('Hides the number next to each search result indicating the number of appearances')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.hideSearchCounts)
+          .onChange((value) => {
+            this.plugin.settings.hideSearchCounts = value;
             this.plugin.saveData(this.plugin.settings);
             this.plugin.refresh();
             })

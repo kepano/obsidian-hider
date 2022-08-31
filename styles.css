@@ -4,6 +4,10 @@
 }
 
 /* Hide ribbon */
+.hider-ribbon.mod-macos.is-hidden-frameless:not(.is-fullscreen):not(.is-popout-window) .workspace-tabs.mod-top-left-space .workspace-tab-header-container {
+  padding-left: calc(var(--frame-left-space) + var(--ribbon-width));
+}
+
 .hider-ribbon .workspace-ribbon.mod-left {
   display:none;
 }
@@ -16,24 +20,6 @@
 }
 .hider-ribbon .workspace-split.mod-left-split {
   margin-left:0;
-}
-
-/* Frameless */
-.hider-frameless .titlebar-button-container {
-  display:none;
-}
-.hider-frameless .titlebar,
-.hider-frameless .titlebar-inner {
-  position:fixed;
-  top:0;
-  height:12px;
-  background:transparent;
-}
-.hider-frameless {
-  padding-top:0 !important;
-}
-.hider-frameless .workspace-split.mod-left-split > .workspace-tabs {
-  padding-top:18px;
 }
 
 /* Hide meta */
@@ -61,7 +47,13 @@
   display: none;
 }
 
+/* Hide search count flair */
+.hider-search-counts .tree-item-flair:not(.tag-pane-tag-count) { 
+  display:none;
+}
+
 /* Hide instructions */
 .hider-instructions .prompt-instructions {
   display:none;
 }
+
