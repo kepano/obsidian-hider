@@ -3,6 +3,11 @@
   display:none;
 }
 
+/* Hide tabs */
+.hider-tabs .mod-root .workspace-tabs .workspace-tab-header-container {
+  display: none;
+}
+
 /* Hide ribbon */
 .hider-ribbon.mod-macos.is-hidden-frameless:not(.is-fullscreen):not(.is-popout-window) .workspace-tabs.mod-top-left-space .workspace-tab-header-container {
   padding-left: calc(var(--frame-left-space) + var(--ribbon-width));

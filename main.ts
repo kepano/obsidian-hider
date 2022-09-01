@@ -12,10 +12,18 @@ export default class Hider extends Plugin {
     // add the toggle on/off command
 
     this.addCommand({
-      id: 'toggle-app-ribbon',
-      name: 'Toggle App Ribbon',
+      id: 'toggle-tab-containers',
+      name: 'Toggle tab bar',
       callback: () => {
-        // switch the setting, save and refresh
+        this.settings.hideTabs = !this.settings.hideTabs;
+        this.saveData(this.settings);
+        this.refresh();
+      }
+    });
+    this.addCommand({
+      id: 'toggle-app-ribbon',
+      name: 'Toggle app ribbon',
+      callback: () => {
         this.settings.hideRibbon = !this.settings.hideRibbon;
         this.saveData(this.settings);
         this.refresh();
@@ -23,9 +31,8 @@ export default class Hider extends Plugin {
     });
     this.addCommand({
       id: 'toggle-hider-status',
-      name: 'Toggle Status Bar',
+      name: 'Toggle status bar',
       callback: () => {
-        // switch the setting, save and refresh
         this.settings.hideStatus = !this.settings.hideStatus;
         this.saveData(this.settings);
         this.refresh();
@@ -56,6 +63,7 @@ export default class Hider extends Plugin {
   updateStyle = () => {
     document.body.classList.toggle('hider-ribbon', this.settings.hideRibbon);
     document.body.classList.toggle('hider-status', this.settings.hideStatus);
+    document.body.classList.toggle('hider-tabs', this.settings.hideTabs);
     document.body.classList.toggle('hider-scroll', this.settings.hideScroll);
     document.body.classList.toggle('hider-tooltips', this.settings.hideTooltips);
     document.body.classList.toggle('hider-search-suggestions', this.settings.hideSearchSuggestions);
@@ -70,6 +78,7 @@ export default class Hider extends Plugin {
 interface HiderSettings {
   hideRibbon: boolean;
   hideStatus: boolean;
+  hideTabs: boolean;
   hideScroll: boolean;
   hideTooltips: boolean;
   hideSearchSuggestions: boolean;
@@ -81,6 +90,7 @@ interface HiderSettings {
 const DEFAULT_SETTINGS: HiderSettings = {
   hideRibbon: false,
   hideStatus: false,
+  hideTabs: false,
   hideScroll: false,
   hideTooltips: false,
   hideSearchSuggestions: false,
@@ -110,6 +120,17 @@ class HiderSettingTab extends PluginSettingTab {
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideRibbon)
           .onChange((value) => {
             this.plugin.settings.hideRibbon = value;
+            this.plugin.saveData(this.plugin.settings);
+            this.plugin.refresh();
+            })
+          );
+
+    new Setting(containerEl)
+      .setName('Hide tab bar')
+      .setDesc('Hides the tab container at the top of the window')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.hideTabs)
+          .onChange((value) => {
+            this.plugin.settings.hideTabs = value;
             this.plugin.saveData(this.plugin.settings);
             this.plugin.refresh();
             })
