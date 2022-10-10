@@ -13,6 +13,9 @@
 .hider-sidebar-buttons .sidebar-toggle-button.mod-left {
   display: none;
 }
+.hider-sidebar-buttons.mod-macos.is-hidden-frameless:not(.is-popout-window) .workspace .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
+  padding-right: 4px;
+}
 
 /* Hide ribbon */
 .hider-ribbon.mod-macos.is-hidden-frameless:not(.is-fullscreen):not(.is-popout-window) .workspace-tabs.mod-top-left-space .workspace-tab-header-container {

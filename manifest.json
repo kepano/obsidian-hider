@@ -1,7 +1,7 @@
 {
 	"id": "obsidian-hider",
 	"name": "Hider",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"minAppVersion": "0.16.0",
 	"description": "Hide UI elements such as tooltips, status, titlebar and more",
 	"author": "@kepano",
