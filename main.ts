@@ -68,6 +68,7 @@ export default class Hider extends Plugin {
     document.body.classList.toggle('hider-sidebar-buttons', this.settings.hideSidebarButtons);
     document.body.classList.toggle('hider-tooltips', this.settings.hideTooltips);
     document.body.classList.toggle('hider-search-suggestions', this.settings.hideSearchSuggestions);
+    document.body.classList.toggle('hider-file-nav-header', this.settings.hideFileNavButtons);
     document.body.classList.toggle('hider-search-counts', this.settings.hideSearchCounts);
     document.body.classList.toggle('hider-instructions', this.settings.hideInstructions);
     document.body.classList.toggle('hider-meta', this.settings.hideMeta);
@@ -83,6 +84,7 @@ interface HiderSettings {
   hideScroll: boolean;
   hideSidebarButtons: boolean;
   hideTooltips: boolean;
+  hideFileNavButtons: boolean;
   hideSearchSuggestions: boolean;
   hideSearchCounts: boolean;
   hideInstructions: boolean;
@@ -96,6 +98,7 @@ const DEFAULT_SETTINGS: HiderSettings = {
   hideScroll: false,
   hideSidebarButtons: false,
   hideTooltips: false,
+  hideFileNavButtons: false,
   hideSearchSuggestions: false,
   hideSearchCounts: false,
   hideInstructions: false,
@@ -189,6 +192,17 @@ class HiderSettingTab extends PluginSettingTab {
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideTooltips)
           .onChange((value) => {
             this.plugin.settings.hideTooltips = value;
+            this.plugin.saveData(this.plugin.settings);
+            this.plugin.refresh();
+            })
+          );
+
+    new Setting(containerEl)
+      .setName('Hide file explorer buttons')
+      .setDesc('Hides buttons at the top of file explorer (new file, new folder, etc)')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.hideFileNavButtons)
+          .onChange((value) => {
+            this.plugin.settings.hideFileNavButtons = value;
             this.plugin.saveData(this.plugin.settings);
             this.plugin.refresh();
             })
