@@ -37,7 +37,7 @@
 }
 
 /* Hide meta */
-.hider-meta .frontmatter-container {
+.hider-meta .markdown-reading-view .metadata-container {
   display:none;
 }
 

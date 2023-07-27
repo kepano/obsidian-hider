@@ -71,7 +71,7 @@ export default class Hider extends Plugin {
     document.body.classList.toggle('hider-file-nav-header', this.settings.hideFileNavButtons);
     document.body.classList.toggle('hider-search-counts', this.settings.hideSearchCounts);
     document.body.classList.toggle('hider-instructions', this.settings.hideInstructions);
-    document.body.classList.toggle('hider-meta', this.settings.hideMeta);
+    document.body.classList.toggle('hider-meta', this.settings.hidePropertiesReading);
     document.body.classList.toggle('hider-vault', this.settings.hideVault);
   }
 
@@ -88,7 +88,7 @@ interface HiderSettings {
   hideSearchSuggestions: boolean;
   hideSearchCounts: boolean;
   hideInstructions: boolean;
-  hideMeta: boolean;
+  hidePropertiesReading: boolean;
   hideVault: boolean;
 }
 const DEFAULT_SETTINGS: HiderSettings = {
@@ -102,7 +102,7 @@ const DEFAULT_SETTINGS: HiderSettings = {
   hideSearchSuggestions: false,
   hideSearchCounts: false,
   hideInstructions: false,
-  hideMeta: false,
+  hidePropertiesReading: false,
   hideVault: false
 }
 
@@ -242,17 +242,15 @@ class HiderSettingTab extends PluginSettingTab {
           );
 
     new Setting(containerEl)
-      .setName('Hide metadata block in Reading view')
-      .setDesc('When front matter is turned off in your Editor settings this hides the metadata block')
-      .addToggle(toggle => toggle.setValue(this.plugin.settings.hideMeta)
+      .setName('Hide properties in Reading view')
+      .setDesc('Hides the properties section in Reading view')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.hidePropertiesReading)
           .onChange((value) => {
-            this.plugin.settings.hideMeta = value;
+            this.plugin.settings.hidePropertiesReading = value;
             this.plugin.saveData(this.plugin.settings);
             this.plugin.refresh();
             })
           );
-
-
 
   }
 }
