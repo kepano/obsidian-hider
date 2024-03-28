@@ -73,6 +73,7 @@ export default class Hider extends Plugin {
     document.body.classList.toggle('hider-instructions', this.settings.hideInstructions);
     document.body.classList.toggle('hider-meta', this.settings.hidePropertiesReading);
     document.body.classList.toggle('hider-vault', this.settings.hideVault);
+    document.body.classList.toggle('hider-pinned-tab-title', this.settings.hidePinnedTabTitle);
   }
 
 }
@@ -90,6 +91,7 @@ interface HiderSettings {
   hideInstructions: boolean;
   hidePropertiesReading: boolean;
   hideVault: boolean;
+  hidePinnedTabTitle: boolean;
 }
 const DEFAULT_SETTINGS: HiderSettings = {
   hideRibbon: false,
@@ -103,7 +105,8 @@ const DEFAULT_SETTINGS: HiderSettings = {
   hideSearchCounts: false,
   hideInstructions: false,
   hidePropertiesReading: false,
-  hideVault: false
+  hideVault: false,
+  hidePinnedTabTitle: false
 }
 
 class HiderSettingTab extends PluginSettingTab {
@@ -247,6 +250,17 @@ class HiderSettingTab extends PluginSettingTab {
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hidePropertiesReading)
           .onChange((value) => {
             this.plugin.settings.hidePropertiesReading = value;
+            this.plugin.saveData(this.plugin.settings);
+            this.plugin.refresh();
+            })
+          );
+
+    new Setting(containerEl)
+      .setName('Hide pinned tab title')
+      .setDesc('Hides the title of the pinned tab (similar to web browsers)')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.hidePinnedTabTitle)
+          .onChange((value) => {
+            this.plugin.settings.hidePinnedTabTitle = value;
             this.plugin.saveData(this.plugin.settings);
             this.plugin.refresh();
             })

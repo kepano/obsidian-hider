@@ -16,6 +16,7 @@ This plugin enables you to hide certain parts of the Obsidian UI. Note that your
 - Hide tooltips
 - Hide instructions in prompts
 - Hide metadata in Reading view
+- Hide pinned tab title
 
 ## Making your theme compatible with Hider
 
@@ -33,3 +34,4 @@ Hider injects the following classes on the `body` element when features are togg
 | Tooltips | `.hider-tooltips` |
 | Instructions | `.hider-instructions` |
 | Metadata | `.hider-meta` |
+| Pinned tab title | `.hider-pinned-tab-title` |
