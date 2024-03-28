@@ -75,3 +75,13 @@
 .hider-file-nav-header .workspace-leaf-content[data-type=file-explorer] .nav-header {
   display: none;
 }
+
+/* Hide pinned tab title */
+.hider-pinned-tab-title .workspace-tab-header-inner-title:has(+ .workspace-tab-header-status-container .mod-pinned) {
+  display: none;
+}
+.hider-pinned-tab-title .workspace .mod-root .workspace-tab-header:has(.mod-pinned) {
+  width: unset;
+  min-width: unset;
+  flex: unset;
+}
