@@ -21,15 +21,6 @@ export default class Hider extends Plugin {
       }
     });
     this.addCommand({
-      id: 'toggle-app-ribbon',
-      name: 'Toggle app ribbon',
-      callback: () => {
-        this.settings.hideRibbon = !this.settings.hideRibbon;
-        this.saveData(this.settings);
-        this.refresh();
-      }
-    });
-    this.addCommand({
       id: 'toggle-hider-status',
       name: 'Toggle status bar',
       callback: () => {
@@ -61,7 +52,6 @@ export default class Hider extends Plugin {
 
   // update the styles (at the start, or as the result of a settings change)
   updateStyle = () => {
-    document.body.classList.toggle('hider-ribbon', this.settings.hideRibbon);
     document.body.classList.toggle('hider-status', this.settings.hideStatus);
     document.body.classList.toggle('hider-tabs', this.settings.hideTabs);
     document.body.classList.toggle('hider-scroll', this.settings.hideScroll);
@@ -78,7 +68,6 @@ export default class Hider extends Plugin {
 }
 
 interface HiderSettings {
-  hideRibbon: boolean;
   hideStatus: boolean;
   hideTabs: boolean;
   hideScroll: boolean;
@@ -92,7 +81,6 @@ interface HiderSettings {
   hideVault: boolean;
 }
 const DEFAULT_SETTINGS: HiderSettings = {
-  hideRibbon: false,
   hideStatus: false,
   hideTabs: false,
   hideScroll: false,
@@ -121,19 +109,8 @@ class HiderSettingTab extends PluginSettingTab {
     containerEl.empty();
 
     new Setting(containerEl)
-      .setName('Hide app ribbon')
-      .setDesc('Hides the Obsidian menu. Warning: to open Settings you will need use the hotkey (default is CMD + ,)')
-      .addToggle(toggle => toggle.setValue(this.plugin.settings.hideRibbon)
-          .onChange((value) => {
-            this.plugin.settings.hideRibbon = value;
-            this.plugin.saveData(this.plugin.settings);
-            this.plugin.refresh();
-            })
-          );
-
-    new Setting(containerEl)
       .setName('Hide tab bar')
-      .setDesc('Hides the tab container at the top of the window')
+      .setDesc('Hides the tab container at the top of the window.')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideTabs)
           .onChange((value) => {
             this.plugin.settings.hideTabs = value;
@@ -144,7 +121,7 @@ class HiderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Hide status bar')
-      .setDesc('Hides word count, character count and backlink count')
+      .setDesc('Hides word count, character count and backlink count.')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideStatus)
           .onChange((value) => {
             this.plugin.settings.hideStatus = value;
@@ -155,7 +132,7 @@ class HiderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Hide vault name')
-      .setDesc('Hides the root folder name')
+      .setDesc('Hides your vault profile. Warning: this also hides access to the Settings and vault switcher icons. You can use hotkeys or the command palette to open them.')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideVault)
           .onChange((value) => {
             this.plugin.settings.hideVault = value;
@@ -166,7 +143,7 @@ class HiderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Hide scroll bars')
-      .setDesc('Hides all scroll bars')
+      .setDesc('Hides all scroll bars.')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideScroll)
           .onChange((value) => {
             this.plugin.settings.hideScroll = value;
@@ -177,7 +154,7 @@ class HiderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Hide sidebar toggle buttons')
-      .setDesc('Hides both sidebar buttons')
+      .setDesc('Hides both sidebar buttons.')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideSidebarButtons)
           .onChange((value) => {
             this.plugin.settings.hideSidebarButtons = value;
@@ -188,7 +165,7 @@ class HiderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Hide tooltips')
-      .setDesc('Hides all tooltips')
+      .setDesc('Hides all tooltips.')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideTooltips)
           .onChange((value) => {
             this.plugin.settings.hideTooltips = value;
@@ -199,7 +176,7 @@ class HiderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Hide file explorer buttons')
-      .setDesc('Hides buttons at the top of file explorer (new file, new folder, etc)')
+      .setDesc('Hides buttons at the top of file explorer (new file, new folder, etc).')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideFileNavButtons)
           .onChange((value) => {
             this.plugin.settings.hideFileNavButtons = value;
@@ -210,7 +187,7 @@ class HiderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Hide instructions')
-      .setDesc('Hides instructional tips in modals')
+      .setDesc('Hides instructional tips in modals.')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideInstructions)
           .onChange((value) => {
             this.plugin.settings.hideInstructions = value;
@@ -221,7 +198,7 @@ class HiderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Hide search suggestions')
-      .setDesc('Hides suggestions in search pane')
+      .setDesc('Hides suggestions in search pane.')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideSearchSuggestions)
           .onChange((value) => {
             this.plugin.settings.hideSearchSuggestions = value;
@@ -232,7 +209,7 @@ class HiderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Hide count of search term matches')
-      .setDesc('Hides the number of matches within each search result')
+      .setDesc('Hides the number of matches within each search result.')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hideSearchCounts)
           .onChange((value) => {
             this.plugin.settings.hideSearchCounts = value;
@@ -243,7 +220,7 @@ class HiderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Hide properties in Reading view')
-      .setDesc('Hides the properties section in Reading view')
+      .setDesc('Hides the properties section in Reading view.')
       .addToggle(toggle => toggle.setValue(this.plugin.settings.hidePropertiesReading)
           .onChange((value) => {
             this.plugin.settings.hidePropertiesReading = value;

@@ -8,3 +8,4 @@ package-lock.json
 
 # build
 *.js.map
+main.js

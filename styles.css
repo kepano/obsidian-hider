@@ -1,5 +1,6 @@
 /* Hides vault name */
-.hider-vault .nav-folder.mod-root > .nav-folder-title .nav-folder-title-content {
+.hider-vault .workspace-sidedock-vault-profile,
+body.hider-vault:not(.is-mobile) .workspace-split.mod-left-split .workspace-sidedock-vault-profile {
   display:none;
 }
 
@@ -15,25 +16,6 @@
 }
 .hider-sidebar-buttons.mod-macos.is-hidden-frameless:not(.is-popout-window) .workspace .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
   padding-right: 4px;
-}
-
-/* Hide ribbon */
-.hider-ribbon.mod-macos.is-hidden-frameless:not(.is-fullscreen):not(.is-popout-window) .workspace-tabs.mod-top-left-space .workspace-tab-header-container {
-  padding-left: calc(var(--frame-left-space) + var(--ribbon-width));
-}
-
-.hider-ribbon .workspace-ribbon.mod-left {
-  display:none;
-}
-.hider-ribbon .workspace-ribbon.mod-right {
-  visibility:hidden;
-  position:absolute;
-}
-.hider-ribbon .workspace-split.mod-right-split {
-  margin-right:0;
-}
-.hider-ribbon .workspace-split.mod-left-split {
-  margin-left:0;
 }
 
 /* Hide meta */
