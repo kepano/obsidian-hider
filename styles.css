@@ -9,6 +9,10 @@ body.hider-vault:not(.is-mobile) .workspace-split.mod-left-split .workspace-side
   display: none;
 }
 
+.hider-tabs .mod-top-left-space .view-header {
+  padding-left: var(--frame-left-space);
+}
+
 /* Hide sidebar buttons */
 .hider-sidebar-buttons .sidebar-toggle-button.mod-right,
 .hider-sidebar-buttons .sidebar-toggle-button.mod-left {
