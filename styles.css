@@ -10,7 +10,7 @@ body.hider-vault:not(.is-mobile) .workspace-split.mod-left-split .workspace-side
 }
 
 .hider-tabs .mod-top-left-space .view-header {
-	padding-left: var(--frame-left-space);
+	padding-left: calc(var(--frame-left-space) + var(--size-4-3));
 }
 
 /* Hide sidebar buttons */
