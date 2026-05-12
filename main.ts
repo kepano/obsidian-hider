@@ -16,7 +16,7 @@ export default class Hider extends Plugin {
       name: 'Toggle tab bar',
       callback: () => {
         this.settings.hideTabs = !this.settings.hideTabs;
-        this.saveData(this.settings);
+        void this.saveData(this.settings);
         this.refresh();
       }
     });
@@ -25,7 +25,7 @@ export default class Hider extends Plugin {
       name: 'Toggle status bar',
       callback: () => {
         this.settings.hideStatus = !this.settings.hideStatus;
-        this.saveData(this.settings);
+        void this.saveData(this.settings);
         this.refresh();
       }
     });
@@ -33,11 +33,10 @@ export default class Hider extends Plugin {
   }
 
   onunload() {
-    console.log('Unloading Hider plugin');
   }
 
   async loadSettings() {
-    this.settings = Object.assign(DEFAULT_SETTINGS, await this.loadData());
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
   }
 
   async saveSettings() {
@@ -117,7 +116,7 @@ class HiderSettingTab extends PluginSettingTab {
           .addToggle(toggle => toggle.setValue(this.plugin.settings.hideTabs)
             .onChange((value) => {
               this.plugin.settings.hideTabs = value;
-              this.plugin.saveData(this.plugin.settings);
+              void this.plugin.saveData(this.plugin.settings);
               this.plugin.refresh();
             })
           );
@@ -129,7 +128,7 @@ class HiderSettingTab extends PluginSettingTab {
           .addToggle(toggle => toggle.setValue(this.plugin.settings.hideStatus)
             .onChange((value) => {
               this.plugin.settings.hideStatus = value;
-              this.plugin.saveData(this.plugin.settings);
+              void this.plugin.saveData(this.plugin.settings);
               this.plugin.refresh();
             })
           );
@@ -141,7 +140,7 @@ class HiderSettingTab extends PluginSettingTab {
           .addToggle(toggle => toggle.setValue(this.plugin.settings.hideVault)
             .onChange((value) => {
               this.plugin.settings.hideVault = value;
-              this.plugin.saveData(this.plugin.settings);
+              void this.plugin.saveData(this.plugin.settings);
               this.plugin.refresh();
             })
           );
@@ -153,7 +152,7 @@ class HiderSettingTab extends PluginSettingTab {
           .addToggle(toggle => toggle.setValue(this.plugin.settings.hideScroll)
             .onChange((value) => {
               this.plugin.settings.hideScroll = value;
-              this.plugin.saveData(this.plugin.settings);
+              void this.plugin.saveData(this.plugin.settings);
               this.plugin.refresh();
             })
           );
@@ -165,7 +164,7 @@ class HiderSettingTab extends PluginSettingTab {
           .addToggle(toggle => toggle.setValue(this.plugin.settings.hideSidebarButtons)
             .onChange((value) => {
               this.plugin.settings.hideSidebarButtons = value;
-              this.plugin.saveData(this.plugin.settings);
+              void this.plugin.saveData(this.plugin.settings);
               this.plugin.refresh();
             })
           );
@@ -177,7 +176,7 @@ class HiderSettingTab extends PluginSettingTab {
           .addToggle(toggle => toggle.setValue(this.plugin.settings.hideTooltips)
             .onChange((value) => {
               this.plugin.settings.hideTooltips = value;
-              this.plugin.saveData(this.plugin.settings);
+              void this.plugin.saveData(this.plugin.settings);
               this.plugin.refresh();
             })
           );
@@ -193,7 +192,7 @@ class HiderSettingTab extends PluginSettingTab {
           .addToggle(toggle => toggle.setValue(this.plugin.settings.hideFileNavButtons)
             .onChange((value) => {
               this.plugin.settings.hideFileNavButtons = value;
-              this.plugin.saveData(this.plugin.settings);
+              void this.plugin.saveData(this.plugin.settings);
               this.plugin.refresh();
             })
           );
@@ -209,7 +208,7 @@ class HiderSettingTab extends PluginSettingTab {
           .addToggle(toggle => toggle.setValue(this.plugin.settings.hideSearchSuggestions)
             .onChange((value) => {
               this.plugin.settings.hideSearchSuggestions = value;
-              this.plugin.saveData(this.plugin.settings);
+              void this.plugin.saveData(this.plugin.settings);
               this.plugin.refresh();
             })
           );
@@ -221,7 +220,7 @@ class HiderSettingTab extends PluginSettingTab {
           .addToggle(toggle => toggle.setValue(this.plugin.settings.hideSearchCounts)
             .onChange((value) => {
               this.plugin.settings.hideSearchCounts = value;
-              this.plugin.saveData(this.plugin.settings);
+              void this.plugin.saveData(this.plugin.settings);
               this.plugin.refresh();
             })
           );
@@ -237,7 +236,7 @@ class HiderSettingTab extends PluginSettingTab {
           .addToggle(toggle => toggle.setValue(this.plugin.settings.hideInstructions)
             .onChange((value) => {
               this.plugin.settings.hideInstructions = value;
-              this.plugin.saveData(this.plugin.settings);
+              void this.plugin.saveData(this.plugin.settings);
               this.plugin.refresh();
             })
           );
@@ -249,7 +248,7 @@ class HiderSettingTab extends PluginSettingTab {
           .addToggle(toggle => toggle.setValue(this.plugin.settings.hidePropertiesReading)
             .onChange((value) => {
               this.plugin.settings.hidePropertiesReading = value;
-              this.plugin.saveData(this.plugin.settings);
+              void this.plugin.saveData(this.plugin.settings);
               this.plugin.refresh();
             })
           );
