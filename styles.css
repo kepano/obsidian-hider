@@ -31,6 +31,9 @@ body.hider-vault:not(.is-mobile) .workspace-split.mod-left-split .workspace-side
 }
 
 /* Hide scrollbars */
+.hider-scroll {
+	--scrollbar-native-width: none;
+}
 .hider-scroll ::-webkit-scrollbar {
 	display:none;
 }
