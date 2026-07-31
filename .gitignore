@@ -5,6 +5,9 @@
 # npm
 node_modules
 
+# local vault path
+.env
+
 # build
 *.js.map
 main.js

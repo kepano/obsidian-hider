@@ -1,4 +1,4 @@
-import { App, Plugin, PluginSettingTab, Setting, SettingGroup } from 'obsidian';
+import { App, Plugin, PluginSettingTab, SettingDefinitionItem } from 'obsidian';
 
 export default class Hider extends Plugin {
   settings: HiderSettings;
@@ -102,157 +102,93 @@ class HiderSettingTab extends PluginSettingTab {
     this.plugin = plugin;
   }
 
-  display(): void {
-    const {containerEl} = this;
+  getSettingDefinitions(): SettingDefinitionItem[] {
+    return [
+      {
+        type: 'group',
+        heading: 'Interface',
+        items: [
+          {
+            name: 'Hide tab bar',
+            desc: 'Hides the tab container at the top of the window.',
+            control: { type: 'toggle', key: 'hideTabs' },
+          },
+          {
+            name: 'Hide status bar',
+            desc: 'Hides word count, character count and backlink count.',
+            control: { type: 'toggle', key: 'hideStatus' },
+          },
+          {
+            name: 'Hide vault name',
+            desc: 'Hides your vault profile. Warning: this also hides access to the Settings and vault switcher icons. You can use hotkeys or the command palette to open them.',
+            control: { type: 'toggle', key: 'hideVault' },
+          },
+          {
+            name: 'Hide scroll bars',
+            desc: 'Hides all scroll bars.',
+            control: { type: 'toggle', key: 'hideScroll' },
+          },
+          {
+            name: 'Hide sidebar toggle buttons',
+            desc: 'Hides both sidebar buttons.',
+            control: { type: 'toggle', key: 'hideSidebarButtons' },
+          },
+          {
+            name: 'Hide tooltips',
+            desc: 'Hides all tooltips.',
+            control: { type: 'toggle', key: 'hideTooltips' },
+          },
+        ],
+      },
+      {
+        type: 'group',
+        heading: 'File explorer',
+        items: [
+          {
+            name: 'Hide file explorer buttons',
+            desc: 'Hides buttons at the top of file explorer (new file, new folder, etc).',
+            control: { type: 'toggle', key: 'hideFileNavButtons' },
+          },
+        ],
+      },
+      {
+        type: 'group',
+        heading: 'Search',
+        items: [
+          {
+            name: 'Hide search suggestions',
+            desc: 'Hides suggestions in search pane.',
+            control: { type: 'toggle', key: 'hideSearchSuggestions' },
+          },
+          {
+            name: 'Hide count of search term matches',
+            desc: 'Hides the number of matches within each search result.',
+            control: { type: 'toggle', key: 'hideSearchCounts' },
+          },
+        ],
+      },
+      {
+        type: 'group',
+        heading: 'Other',
+        items: [
+          {
+            name: 'Hide instructions',
+            desc: 'Hides instructional tips in quick switcher and command palette.',
+            control: { type: 'toggle', key: 'hideInstructions' },
+          },
+          {
+            name: 'Hide properties in Reading view',
+            desc: 'Hides the properties section in Reading view.',
+            control: { type: 'toggle', key: 'hidePropertiesReading' },
+          },
+        ],
+      },
+    ];
+  }
 
-    containerEl.empty();
-
-    new SettingGroup(containerEl)
-      .setHeading('Interface')
-      .addSetting((setting: Setting) => {
-        setting
-          .setName('Hide tab bar')
-          .setDesc('Hides the tab container at the top of the window.')
-          .addToggle(toggle => toggle.setValue(this.plugin.settings.hideTabs)
-            .onChange((value) => {
-              this.plugin.settings.hideTabs = value;
-              void this.plugin.saveData(this.plugin.settings);
-              this.plugin.refresh();
-            })
-          );
-      })
-      .addSetting((setting: Setting) => {
-        setting
-          .setName('Hide status bar')
-          .setDesc('Hides word count, character count and backlink count.')
-          .addToggle(toggle => toggle.setValue(this.plugin.settings.hideStatus)
-            .onChange((value) => {
-              this.plugin.settings.hideStatus = value;
-              void this.plugin.saveData(this.plugin.settings);
-              this.plugin.refresh();
-            })
-          );
-      })
-      .addSetting((setting: Setting) => {
-        setting
-          .setName('Hide vault name')
-          .setDesc('Hides your vault profile. Warning: this also hides access to the Settings and vault switcher icons. You can use hotkeys or the command palette to open them.')
-          .addToggle(toggle => toggle.setValue(this.plugin.settings.hideVault)
-            .onChange((value) => {
-              this.plugin.settings.hideVault = value;
-              void this.plugin.saveData(this.plugin.settings);
-              this.plugin.refresh();
-            })
-          );
-      })
-      .addSetting((setting: Setting) => {
-        setting
-          .setName('Hide scroll bars')
-          .setDesc('Hides all scroll bars.')
-          .addToggle(toggle => toggle.setValue(this.plugin.settings.hideScroll)
-            .onChange((value) => {
-              this.plugin.settings.hideScroll = value;
-              void this.plugin.saveData(this.plugin.settings);
-              this.plugin.refresh();
-            })
-          );
-      })
-      .addSetting((setting: Setting) => {
-        setting
-          .setName('Hide sidebar toggle buttons')
-          .setDesc('Hides both sidebar buttons.')
-          .addToggle(toggle => toggle.setValue(this.plugin.settings.hideSidebarButtons)
-            .onChange((value) => {
-              this.plugin.settings.hideSidebarButtons = value;
-              void this.plugin.saveData(this.plugin.settings);
-              this.plugin.refresh();
-            })
-          );
-      })
-      .addSetting((setting: Setting) => {
-        setting
-          .setName('Hide tooltips')
-          .setDesc('Hides all tooltips.')
-          .addToggle(toggle => toggle.setValue(this.plugin.settings.hideTooltips)
-            .onChange((value) => {
-              this.plugin.settings.hideTooltips = value;
-              void this.plugin.saveData(this.plugin.settings);
-              this.plugin.refresh();
-            })
-          );
-      });
-
-    // File explorer
-    new SettingGroup(containerEl)
-      .setHeading('File explorer')
-      .addSetting((setting: Setting) => {
-        setting
-          .setName('Hide file explorer buttons')
-          .setDesc('Hides buttons at the top of file explorer (new file, new folder, etc).')
-          .addToggle(toggle => toggle.setValue(this.plugin.settings.hideFileNavButtons)
-            .onChange((value) => {
-              this.plugin.settings.hideFileNavButtons = value;
-              void this.plugin.saveData(this.plugin.settings);
-              this.plugin.refresh();
-            })
-          );
-      });
-
-    // Search
-    new SettingGroup(containerEl)
-      .setHeading('Search')
-      .addSetting((setting: Setting) => {
-        setting
-          .setName('Hide search suggestions')
-          .setDesc('Hides suggestions in search pane.')
-          .addToggle(toggle => toggle.setValue(this.plugin.settings.hideSearchSuggestions)
-            .onChange((value) => {
-              this.plugin.settings.hideSearchSuggestions = value;
-              void this.plugin.saveData(this.plugin.settings);
-              this.plugin.refresh();
-            })
-          );
-      })
-      .addSetting((setting: Setting) => {
-        setting
-          .setName('Hide count of search term matches')
-          .setDesc('Hides the number of matches within each search result.')
-          .addToggle(toggle => toggle.setValue(this.plugin.settings.hideSearchCounts)
-            .onChange((value) => {
-              this.plugin.settings.hideSearchCounts = value;
-              void this.plugin.saveData(this.plugin.settings);
-              this.plugin.refresh();
-            })
-          );
-      });
-
-    // Other
-    new SettingGroup(containerEl)
-      .setHeading('Other')
-      .addSetting((setting: Setting) => {
-        setting
-          .setName('Hide instructions')
-          .setDesc('Hides instructional tips in quick switcher and command palette.')
-          .addToggle(toggle => toggle.setValue(this.plugin.settings.hideInstructions)
-            .onChange((value) => {
-              this.plugin.settings.hideInstructions = value;
-              void this.plugin.saveData(this.plugin.settings);
-              this.plugin.refresh();
-            })
-          );
-      })
-      .addSetting((setting: Setting) => {
-        setting
-          .setName('Hide properties in Reading view')
-          .setDesc('Hides the properties section in Reading view.')
-          .addToggle(toggle => toggle.setValue(this.plugin.settings.hidePropertiesReading)
-            .onChange((value) => {
-              this.plugin.settings.hidePropertiesReading = value;
-              void this.plugin.saveData(this.plugin.settings);
-              this.plugin.refresh();
-            })
-          );
-      });
-
+  async setControlValue(key: string, value: unknown): Promise<void> {
+    await super.setControlValue(key, value);
+    // Every toggle re-applies the body classes.
+    this.plugin.refresh();
   }
 }
