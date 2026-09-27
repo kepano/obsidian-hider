@@ -21,9 +21,6 @@ body.hider-vault:not(.is-mobile) .workspace-split.mod-left-split .workspace-side
 .hider-sidebar-buttons.mod-macos.is-hidden-frameless:not(.is-popout-window) .workspace .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
 	padding-right: 4px;
 }
-.hider-sidebar-buttons.mod-macos {
-	--frame-left-space: 60px;
-}
 
 /* Hide meta */
 .hider-meta .markdown-reading-view .metadata-container {
